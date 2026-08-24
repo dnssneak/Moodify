@@ -6,12 +6,64 @@ import { MOCK_TRACKS } from '../data/tracks';
 export class AIService {
   private static getClient(apiKey?: string): GoogleGenAI | null {
     const key = apiKey || import.meta.env.VITE_GEMINI_API_KEY;
-    if (!key) return null;
+    if (!key || key === 'your_gemini_api_key_here') return null;
     try {
       return new GoogleGenAI({ apiKey: key });
-    } catch {
+    } catch (e) {
+      console.error('Failed to initialize GoogleGenAI client:', e);
       return null;
     }
+  }
+
+  /**
+   * Helper to clean Markdown code block wrappers from Gemini JSON responses
+   */
+  private static cleanJsonResponse(text: string): string {
+    let clean = text.trim();
+    if (clean.startsWith('```')) {
+      clean = clean.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+    }
+    return clean;
+  }
+
+  /**
+   * Sequentially attempts candidate models until one succeeds
+   */
+  private static async generateContentWithFallback(
+    aiClient: GoogleGenAI,
+    prompt: string
+  ): Promise<string> {
+    const candidateModels = [
+      'gemini-3.6-flash',
+      'gemini-2.5-flash',
+      'gemini-2.0-flash',
+      'gemini-1.5-flash',
+      'gemini-2.5-pro',
+      'gemini-1.5-pro',
+      'gemini-2.0-flash-exp',
+      'gemini-1.5-flash-latest',
+    ];
+
+    let lastError: unknown = null;
+    for (const model of candidateModels) {
+      try {
+        const response = await aiClient.models.generateContent({
+          model,
+          contents: prompt,
+          config: { responseMimeType: 'application/json' },
+        });
+        if (response.text) {
+          console.log(`✨ Successfully connected to Gemini API using model: ${model}`);
+          return response.text;
+        }
+      } catch (err: unknown) {
+        lastError = err;
+        const msg = err instanceof Error ? err.message : String(err);
+        console.warn(`Model candidate '${model}' unavailable (${msg}), attempting next candidate...`);
+      }
+    }
+
+    throw lastError || new Error('All candidate Gemini models failed.');
   }
 
   /**
@@ -25,7 +77,6 @@ export class AIService {
     const aiClient = this.getClient(apiKey);
 
     if (!aiClient) {
-      // Automatic Local Recommendation Fallback Engine
       return RecommendationService.getRecommendations(query, undefined, preferences);
     }
 
@@ -52,18 +103,11 @@ Select top 5 tracks that best match the query intent. Return strictly valid JSON
   }
 ]`;
 
-      const response = await aiClient.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: prompt,
-        config: {
-          responseMimeType: 'application/json',
-        },
-      });
+      const responseText = await this.generateContentWithFallback(aiClient, prompt);
+      if (!responseText) throw new Error('Empty AI response from Gemini');
 
-      const responseText = response.text;
-      if (!responseText) throw new Error('Empty AI response');
-
-      const parsed: AIRecommendation[] = JSON.parse(responseText);
+      const cleanJson = this.cleanJsonResponse(responseText);
+      const parsed: AIRecommendation[] = JSON.parse(cleanJson);
 
       const results = parsed
         .map((rec) => {
@@ -76,7 +120,7 @@ Select top 5 tracks that best match the query intent. Return strictly valid JSON
       if (results.length === 0) throw new Error('No valid track matches from AI');
       return results;
     } catch (err) {
-      console.warn('Gemini API call failed or unavailable, falling back to local AI engine:', err);
+      console.warn('Gemini API call failed, falling back to local AI engine:', err);
       return RecommendationService.getRecommendations(query, undefined, preferences);
     }
   }
@@ -108,13 +152,9 @@ Return JSON:
   "trackIds": ["track-1", "track-2"]
 }`;
 
-        const response = await aiClient.models.generateContent({
-          model: 'gemini-2.5-flash',
-          contents: aiPrompt,
-          config: { responseMimeType: 'application/json' },
-        });
-
-        const data = JSON.parse(response.text || '{}');
+        const responseText = await this.generateContentWithFallback(aiClient, aiPrompt);
+        const cleanJson = this.cleanJsonResponse(responseText || '{}');
+        const data = JSON.parse(cleanJson);
         if (data.name) playlistName = data.name;
         if (data.description) playlistDesc = data.description;
         if (Array.isArray(data.trackIds)) {
