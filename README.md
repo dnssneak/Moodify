@@ -2,7 +2,9 @@
 
 ![Moodify Platform Banner](https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80)
 
-> **Moodify** is a production-grade, AI-driven music discovery platform and interactive sonic studio. It leverages Google Gemini AI to analyze natural language intent, generate curated playlists, calculate vector mood match percentages, and trigger Web Audio synth previews with WebGL 3D sound visualizers.
+> **Moodify** is an AI-driven music discovery platform and interactive sonic studio. It leverages Google Gemini AI to analyze natural language intent, generate curated playlists, calculate vector mood match percentages, and trigger Web Audio synth previews with WebGL 3D sound visualizers.
+>
+> **Note on Project Focus**: This project is primarily engineered as a **frontend-heavy UI/UX, motion design, and aesthetic showcase**. The focus is centered on production-grade visual polish, responsive spatial layouts, WebGL canvas visualizers, 60FPS GPU micro-interactions, and design system engineering rather than backend database infrastructure or full server-side features.
 
 ---
 
