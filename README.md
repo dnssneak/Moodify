@@ -6,6 +6,22 @@
 
 ---
 
+## 📌 Project Overview
+
+### 📝 Project Brief
+**Moodify** is an AI-powered sonic discovery platform and interactive web audio studio designed to replace generic, algorithmic search with expressive, natural language prompt curation. Built with React 19, Vite, and Google Gemini AI, Moodify translates human emotions, activities, and complex aesthetic descriptions into real-time vector-matched music recommendations, custom AI playlists, live Web Audio synthesizer previews, and WebGL 3D soundscapes.
+
+### ❓ What Problem Does It Solve?
+Traditional music discovery platforms rely heavily on rigid genre tags, popularity charts, or simple keyword search, failing to understand complex emotional states, multi-layered activities, or subtle ambient vibes (e.g., *"late-night rainy focus beats with vintage fender rhodes"*). Moodify solves this by utilizing Google Gemini LLM intent parsing and a local vector recommendation engine to match music directly to a user’s precise emotional and situational context.
+
+### 🎯 Who Is It For?
+Moodify is built for music enthusiasts, deep-work professionals, students, creators, and audiophiles seeking a personalized, distraction-free sonic environment tailored to their exact mood, energy level, or creative workflow.
+
+### 💡 Why Did You Choose This Idea?
+We chose this idea to bridge the gap between generative AI intelligence and interactive web audio technologies. By pairing Google Gemini's natural language comprehension with WebGL 3D visualizers and Web Audio API synthesis, Moodify demonstrates how AI can elevate streaming interfaces into immersive, studio-grade artistic experiences.
+
+---
+
 ## 🌟 Key Features
 
 - 🤖 **Natural Language AI Music Curator**: Prompt-driven music search powered by Google Gemini (`gemini-3.6-flash` / `gemini-2.0-flash`) with automatic offline vector recommendation fallback.
