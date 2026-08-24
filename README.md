@@ -6,38 +6,38 @@
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
-### 📝 Project Brief
+### Project Brief
 **Moodify** is an AI-powered sonic discovery platform and interactive web audio studio designed to replace generic, algorithmic search with expressive, natural language prompt curation. Built with React 19, Vite, and Google Gemini AI, Moodify translates human emotions, activities, and complex aesthetic descriptions into real-time vector-matched music recommendations, custom AI playlists, live Web Audio synthesizer previews, and WebGL 3D soundscapes.
 
-### ❓ What Problem Does It Solve?
+### What Problem Does It Solve?
 Traditional music discovery platforms rely heavily on rigid genre tags, popularity charts, or simple keyword search, failing to understand complex emotional states, multi-layered activities, or subtle ambient vibes (e.g., *"late-night rainy focus beats with vintage fender rhodes"*). Moodify solves this by utilizing Google Gemini LLM intent parsing and a local vector recommendation engine to match music directly to a user’s precise emotional and situational context.
 
-### 🎯 Who Is It For?
+### Who Is It For?
 Moodify is built for music enthusiasts, deep-work professionals, students, creators, and audiophiles seeking a personalized, distraction-free sonic environment tailored to their exact mood, energy level, or creative workflow.
 
-### 💡 Why Did You Choose This Idea?
+### Why Did You Choose This Idea?
 We chose this idea to bridge the gap between generative AI intelligence and interactive web audio technologies. By pairing Google Gemini's natural language comprehension with WebGL 3D visualizers and Web Audio API synthesis, Moodify demonstrates how AI can elevate streaming interfaces into immersive, studio-grade artistic experiences.
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
-- 🤖 **Natural Language AI Music Curator**: Prompt-driven music search powered by Google Gemini (`gemini-3.6-flash` / `gemini-2.0-flash`) with automatic offline vector recommendation fallback.
-- 🎵 **AI Playlist Generator**: Generates custom playlists complete with creative titles, atmospheric descriptions, dominant mood context, and track selections.
-- 🎹 **Interactive Web Audio Synthesizer**: Web Audio API oscillator synth engine providing live audio previews, base frequency presets, and detune parameters.
-- 🔮 **WebGL & 3D Audio Visualizers**: Interactive soundscape visualizers (3D particle spheres, circular spectrums, and dynamic frequency bars) built with Three.js and Canvas2D.
-- 🎨 **Sonic Editorial UI/UX Design System**:
+- **Natural Language AI Music Curator**: Prompt-driven music search powered by Google Gemini (`gemini-3.6-flash` / `gemini-2.0-flash`) with automatic offline vector recommendation fallback.
+- **AI Playlist Generator**: Generates custom playlists complete with creative titles, atmospheric descriptions, dominant mood context, and track selections.
+- **Interactive Web Audio Synthesizer**: Web Audio API oscillator synth engine providing live audio previews, base frequency presets, and detune parameters.
+- **WebGL & 3D Audio Visualizers**: Interactive soundscape visualizers (3D particle spheres, circular spectrums, and dynamic frequency bars) built with Three.js and Canvas2D.
+- **Sonic Editorial UI/UX Design System**:
   - Dark Studio Aesthetics (`#000000`, `#101010`, `#DEDBC8`, `#E1E0CC`)
   - Modern Google Fonts pairing (`Instrument Serif` for headlines, `Inter` for UI, `Almarai` for body text)
   - Glassmorphic panels, responsive hanging floating navbar, and 60FPS GPU-accelerated micro-interactions
   - 100% Vector Icon system using Lucide SVG icons (no raw emojis)
-- 💾 **Local Storage Sync**: Persistent user state for favorites, custom playlists, recent search queries, spatial audio toggles, and discovery diversity preferences.
+- **Local Storage Sync**: Persistent user state for favorites, custom playlists, recent search queries, spatial audio toggles, and discovery diversity preferences.
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 | Layer | Technology |
 | :--- | :--- |
@@ -51,7 +51,7 @@ We chose this idea to bridge the gap between generative AI intelligence and inte
 
 ---
 
-## 📂 Project Architecture
+## Project Architecture
 
 ```text
 Moodify/
@@ -83,7 +83,7 @@ Moodify/
 
 ---
 
-## 🚀 Quick Start Guide
+## Quick Start Guide
 
 ### Prerequisites
 - **Node.js**: v18.0.0 or higher
@@ -126,7 +126,7 @@ Moodify/
 
 ---
 
-## 🔑 Obtaining a Gemini API Key
+## Obtaining a Gemini API Key
 
 1. Go to [Google AI Studio](https://aistudio.google.com/app/apikey).
 2. Click **Create API Key** in your project dashboard.
@@ -137,6 +137,6 @@ Moodify/
 
 ---
 
-## 📄 License
+## License
 
 Distributed under the **MIT License**. See `LICENSE` for more information.
